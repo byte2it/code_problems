@@ -1,0 +1,39 @@
+class Solution {
+    bool is_in_dict(string w, vector<string>& wordDict){
+        for(auto& x : wordDict){
+            if(x.compare(w) == 0)
+                return true;            
+        }
+        return false;
+    }
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int size = s.size();
+        
+        if(size ==0)
+            return true;
+        
+        bool table[size+1] = {0};
+        
+        for(int i = 1; i <= size; ++i){
+            if(table[i] == false && is_in_dict(s.substr(0, i), wordDict))
+                table[i] = true;
+            
+            if(table[i] == true){
+                if(i == size)
+                    return true;
+                
+                for(int j = i+1; j <=size; ++j){
+                    if(table[j] == false && is_in_dict(s.substr(i, j-i),wordDict))
+                        table[j] = true;
+                    
+                    if(j == size && table[j] == true)
+                        return true;
+                        
+                }
+            }
+        }
+  
+        return false;
+    }
+};
