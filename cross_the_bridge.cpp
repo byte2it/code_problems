@@ -8,9 +8,7 @@
 using namespace std;
 
 /*
-
 The approach is:
-
 1. We do sort the array of people in ascending order by time which they need to cross the bridge
 2. Two people who have less times - will carry the torches (array torchers)
     Every second time torches are carried by two slowest people  
@@ -21,17 +19,19 @@ The approach is:
 6. first loop continues untill array of people becomes empty
 7. After that we move torchers to left bank
 8. Cases where we have 1-3 people have specific handling
-
 */
 
 int get_time(vector<int>& v) {
 
 	if (v.size() == 0)
 		return 0;
+    
+    if (v.size() == 2)
+        return max(v[0], v[1]);
 
 	int res = 0;
 
-	if (v.size() == 1 || v.size() == 2 || v.size() == 3) {
+	if (v.size() == 1 || v.size() == 3) {
 		for (int i = 0; i < v.size(); ++i)
 			res += v[i];
 		return res;
@@ -114,8 +114,13 @@ int main(int argc, char** argv)
 	vector<int> people1 = { 1,2,5,8 };
 
 	vector<int> people2 = { 10,20,30 };
+    
+    vector<int> people3 = { 10,20 };
+
 	int time_1 = get_time(people1);
 	int time_2 = get_time(people2);
+    int time_3 = get_time(people3);
+  
 
-	cout << time_1 << ", " << time_2 << endl;
+	cout << time_1 << ", " << time_2 << ", " << time_3 << endl;
 }
