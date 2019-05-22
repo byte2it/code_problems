@@ -70,10 +70,25 @@ int get_time(vector<int>& v) {
 
 		else {
 			if (torch_on_right) {
-				res += max(people[people.size() - 1], people[people.size() - 2]);
-				people.erase(people.begin() + people.size() - 1);
-				people.erase(people.begin() + people.size() - 1);
-				torch_on_right = false;
+                if(people.size() > 1) {
+				    res += max(people[people.size() - 1], people[people.size() - 2]);
+				    people.erase(people.begin() + people.size() - 1);
+				    people.erase(people.begin() + people.size() - 1);				    
+                }
+                else if(people.size() == 1) {
+                    res += people[0];
+                    people.clear();
+                    if(torchers.size() == 1)
+                        torchers.clear();
+                    else if(torchers.size() == 2){
+                        if(torchers[0] > torchers[1])
+                            torchers.erase(torchers.begin());
+                        else
+                            torchers.erase(torchers.begin()+1);
+                    } 
+                }
+                    
+                torch_on_right = false;
 			}
 			else {
 				if (torchers_left.size() == 1) {
@@ -111,16 +126,18 @@ int get_time(vector<int>& v) {
 
 int main(int argc, char** argv)
 {
-	vector<int> people1 = { 1,2,5,8 };
+    vector<int> people1 = { 1,2,5,8 };
 
-	vector<int> people2 = { 10,20,30 };
+    vector<int> people2 = { 10,20,30 };
     
     vector<int> people3 = { 10,20 };
+    
+    vector<int> people4 = { 1,2,5,8,7 };
 
-	int time_1 = get_time(people1);
-	int time_2 = get_time(people2);
+    int time_1 = get_time(people1);
+    int time_2 = get_time(people2);
     int time_3 = get_time(people3);
-  
+    int time_4 = get_time(people4);  
 
-	cout << time_1 << ", " << time_2 << ", " << time_3 << endl;
+    cout << time_1 << ", " << time_2 << ", " << time_3 << ", " << time_4 << endl;
 }
