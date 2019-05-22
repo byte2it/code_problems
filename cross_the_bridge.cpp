@@ -13,6 +13,8 @@ The approach is:
 
 1. We do sort the array of people in ascending order by time which they need to cross the bridge
 2. Two people who have less times - will carry the torches (array torchers)
+    Every second time torches are carried by two slowest people  
+    (it saves us time comparing to option for them will go separately)
 3. Rest of the people are kept in separate array (array people)
 4. Lets say that people go from right bank to left bank
 5. We keep track where torch is located using boolean variable 'torch_on_right'
