@@ -4,16 +4,13 @@
 using namespace std;
 
 int best_profit(vector<int>& arr) {
-	int i = 0, buy = 0, sell = 0, min = 0, profit = 0;
+	int i = 0,  min = 0, profit = 0;
 
-	for (i = 0; i < arr.size(); i++) {
+	for (i = 0; i < arr.size(); ++i) {
 		if (arr[i] < arr[min])
 			min = i;
-		else if (arr[i] - arr[min] > profit) {
-			buy = min;
-			sell = i;
+		else if (arr[i] - arr[min] > profit)
 			profit = arr[i] - arr[min];
-		}
 	}
 	return profit;
 }
