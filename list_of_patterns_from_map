@@ -1,0 +1,78 @@
+/*
+
+Given a string as input, return the list of all the patterns possible:
+
+
+'1' : ['A', 'B', 'C'],
+'2' : ['D', 'E'],
+'12' : ['X']
+'3' : ['P', 'Q']
+Example if input is '123', then output should be [ADP, ADQ, AEP, AEQ, BDP, BDQ, BEP, BEQ, CDP, CDQ, CEP, CEQ, XP, XQ]
+
+*/
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unordered_map>  
+
+
+std::vector<std::string> collect(std::unordered_map<std::string, std::list<std::string>>& data, const std::string& part)
+{
+	std::vector<std::string> results;
+
+
+	for (int i = 1; i <= part.length(); i++) {
+		std::string s = part.substr(0, i);
+
+		auto it = data.find(s);
+		if (it != data.end()) {
+
+
+			if (s.length() == part.length()) {
+				for (auto&& it3 : it->second) {
+					results.push_back(it3);
+				}
+			}
+			else {
+				std::string h = part.substr(i, part.length() - i);
+				std::vector<std::string> sub_results = collect(data, h);
+				for (auto&& it3 : it->second) {
+					for (auto&& it2 : sub_results) {
+						results.push_back(it3 + it2);
+					}
+				}
+
+			}
+		}
+
+	}
+	return results;
+}
+
+
+
+int main()
+{
+	std::unordered_map<std::string, std::list<std::string>> data;
+	data["1"].push_back("A");
+	data["1"].push_back("B");
+	data["1"].push_back("C");
+
+	data["2"].push_back("D");
+	data["2"].push_back("E");
+
+	data["12"].push_back("X");
+
+	data["3"].push_back("P");
+	data["3"].push_back("Q");
+
+
+	std::vector<std::string> results = collect(data, "123");
+
+	for (auto&& it2 : results) {
+		std::cout << it2 << " ";
+	}
+
+	return 0;
+}
