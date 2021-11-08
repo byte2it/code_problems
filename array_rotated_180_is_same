@@ -1,0 +1,35 @@
+#include <iostream>
+#include <map>
+#include <vector>
+
+using namespace std;
+
+
+bool is_rotated(vector<int>& v) {
+
+    map<int, int> mm;
+
+    mm[0] = 0;
+    mm[1] = 1;
+    mm[6] = 9;
+    mm[8] = 8;
+    mm[9] = 6;
+
+    int start = 0, end = v.size() - 1;
+
+    for (; start <= end; ++start, --end) {
+        if (mm[v[start]] != v[end])
+            return false;
+    }
+
+    return true;
+
+}
+
+
+int main()
+{
+    vector<int> input1 = {1,6,0,9,1};
+
+    std::cout << is_rotated(input1);
+}
