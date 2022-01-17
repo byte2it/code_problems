@@ -5,6 +5,8 @@
 #include <vector>
 #include <unistd.h>
 
+// more on that - https://leetcode.com/discuss/interview-question/operating-system/1001879/C%2B%2B-or-Producer-Consumer-Synchronization-Problem-or-Embedded-or-Operating-System
+
 using namespace std;
 
 vector<int> buffer;
